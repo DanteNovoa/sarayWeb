@@ -2,6 +2,8 @@
 const { Router } = require('express');
 const router = Router();
 
+const User = require('../models/User');
+
 //Create a new route with the method GET
 router.get('/api', (req, res) => {
     res.send(`Hello World!`);
