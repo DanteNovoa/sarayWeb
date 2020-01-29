@@ -1,0 +1,30 @@
+<div class="container">
+  <h1 class="text-center">Contáctame!</h1>
+
+  <form [formGroup]="forma" (ngSubmit)="guardar()" novalidate="novalidate" class="col-sm-9">
+    <div class="form-group">
+      <label for="exampleFormControlInput1">Name</label>
+      <input type="name" class="col-sm-4 form-control form-control-sm" id="exampleFormControlInput1"
+        placeholder="Ingresa tu nombre"  formControlName="nombre" required>
+    </div>
+    <div class="form-group">
+      <label for="exampleFormControlSelect1">Asunto</label>
+      <input type="text" class="col-sm-4 form-control form-control-sm" placeholder="Asunto" 
+        formControlName="tituloAsunto" required>
+    </div>
+
+    <div class="form-group">
+      <label for="exampleFormControlSelect1">Correo</label>
+      <input type="email" class="col-sm-4 form-control form-control-sm" placeholder="tucorreo@ejemplo" 
+        formControlName="Correo" required>
+    </div>
+
+    <div class="form-group">
+      <label for="exampleFormControlTextarea1">Mensaje</label>
+      <textarea class="form-control" id="exampleFormControlTextarea1" rows="2" 
+       formControlName="Mensaje" required></textarea>
+    </div>
+
+    <button type="submit" class="btn btn-primary mb-2">Enviar</button>
+  </form>
+</div>
