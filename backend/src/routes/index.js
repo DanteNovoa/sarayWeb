@@ -9,8 +9,11 @@ router.get('/', (req, res) => {
     res.send(`Hello World!`);
 });
 
-router.post('/signup', (req, res) => {
+router.post('/signup', async (req, res) => {
     const { email, password } = req.body;
+    const newUser = new User({ email, password });
+    await newUser.save();
+    console.log(newUser);
     res.send(req.body);
 });
 
