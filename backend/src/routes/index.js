@@ -9,8 +9,9 @@ router.get('/', (req, res) => {
     res.send(`Hello World!`);
 });
 
-router.post('/signup', (req, res) =>{
-    res.send(`New user`);
+router.post('/signup', (req, res) => {
+    const { email, password } = req.body;
+    res.send(req.body);
 });
 
 // Export the object that contains the routes

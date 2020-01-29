@@ -5,6 +5,9 @@ const mongoose = require('./database');
 // Create an instance from the object express
 const app = express();
 
+// This method allow convert the data received from the frontend to an object
+app.use(express.json());
+
 // express will use the file in this path to use the routes
 app.use(require('./routes/index'));
 
