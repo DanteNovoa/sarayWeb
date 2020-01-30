@@ -2,6 +2,7 @@
 const { Router } = require('express');
 const router = Router();
 const jwt = require('jsonwebtoken');
+const nodemailer = require('nodemailer');
 
 const User = require('../models/User');
 const Contact = require('../models/Contact');
@@ -37,14 +38,52 @@ router.post('/signin', async (req, res) => {
 
 router.post('/sendcontact', async (req, res) => {
     const { nombre, tituloAsunto, Correo, Mensaje } = req.body;
+    const userMailer = 'tuCorreo';
+    const passMailer = 'pass';
     const newContact = new Contact({ nombre, tituloAsunto, Correo, Mensaje });
     await newContact.save();
+
+    if (userMailer != 'tuCorreo' && passMailer != 'pass')
+    {
+        const service = nodemailer.createTransport({
+            service: 'gmail',
+            auth: {
+                user: userMailer,
+                pass: passMailer
+            }
+        });
+    
+        const email = {
+            from: Correo,
+            to: 'luisghtz@outlook.com',
+            subject: nombre + ": " + tituloAsunto,
+            text: Mensaje
+        }
+    
+        service.sendMail(email, (err, info) => {
+            if (err)
+            {
+                console.log(err);
+            }
+            else
+            {
+                console.log("Email enviado");
+            }
+        })
+    }
 
     res.send("Ok");
 });
 
-router.get('/getcontacts', verifyToken, (req, res) => {
-
+router.get('/getallcontacts', (req, res) => {
+    const all = Contact.find({}, (err, data) => {
+        if (err)
+        {
+            console.log(err);
+            res.send("An error has occurred, please try later")
+        }
+        res.json(data);
+    });
 });
 
 // Export the object that contains the routes
